@@ -1,15 +1,41 @@
 <template>
   <div class="vote">
-    <h3>Drag Options to vote</h3>
-      <draggable class="list-group" :list="candidates" group="people">
+    <b-container class="mt-5 p-3">
+      <b-row>
+        <h1>Vote</h1>
+      </b-row>
+      <hr>
+      <b-row>
+        <h3>Drag to arrange options in order of preference</h3>
+      </b-row>
+      <hr>
+      <b-row>
+        <h3>{{question}}</h3>
+      </b-row>
+      <b-row>
+      <draggable class="list-group mb-3" :list="candidates" group="people">
         <div class="list-group-item" v-for="(element, index) in candidates" v-bind:key="index">
-          {{ element.name }} {{ index + 1 }}
+          {{ index + 1 }} {{ element.name }} 
         </div>
       </draggable>
-      <b-button v-on:click="submitBallot()" variant="primary">Submit Vote</b-button>
+      </b-row>
+      <hr>
+      <b-row>
+        <b-button v-on:click="submitBallot()" variant="primary">Submit Vote</b-button>
+      </b-row>
+     
+    
+      
+      
+    </b-container>
   </div>
   
 </template>
+<style scoped>
+  .list-group-item{
+    color:
+  }
+</style>
 <script>
 import { db } from '../db'
 import draggable from "vuedraggable";
@@ -27,6 +53,7 @@ export default {
   },
   data() {
     return {
+      title: "",
       candidates: [],
       saved_candidates: [],
       currentPoll: null,
@@ -36,9 +63,7 @@ export default {
   },
   
   created:function(){
-    polls.doc(this.$route.params.pollid).get().then(snapshot=>{this.candidates = snapshot.data().candidates})// this gets the candidates list from the firebase db without doing any live binding
-    polls.doc(this.$route.params.pollid).get().then(snapshot=>{this.saved_candidates = snapshot.data().candidates})
-    polls.doc(this.$route.params.pollid).get().then(snapshot=>{this.ballots = snapshot.data().ballots})
+    polls.doc(this.$route.params.pollid).get().then(snapshot=>{this.candidates = snapshot.data().candidates, this.title = snapshot.data().question})// this gets the candidates list from the firebase db without doing any live binding
 
 // this.$route.params.pollid
 
@@ -54,11 +79,19 @@ export default {
     },
   },
   methods:{
+
     submitBallot(){
+      polls.doc(this.$route.params.pollid).get().then(snapshot=>{
+        this.saved_candidates = snapshot.data().candidates, this.gofast()
+  
+        })
+    },
+    gofast(){
       for(var i = 0; i < this.candidates.length; i++){
         this.saved_candidates[this.candidates[i].original_index].votes += this.candidates.length - i
       }
       polls.doc(this.$route.params.pollid).update({candidates: this.saved_candidates})
+  
     },
     log(){
       
