@@ -64,8 +64,7 @@ body, html {
   width: 100%;
 }
 body {
-  background-color:#ded568;
-  color:#A82711;
+  
 }
   
   .inputsize{
