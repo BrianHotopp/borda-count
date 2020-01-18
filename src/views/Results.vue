@@ -16,8 +16,8 @@
           :points=graphdata
           :show-y-axis="false"
           :show-x-axis="true"
-          :width=250
-          :height=90
+          :width=windowWidth
+          :height=200
           :show-values="true"
           
         />
@@ -40,9 +40,10 @@
         candidates: [],
         question: "",
         graphdata: [],
-        
+        windowWidth: Math.min(window.innerWidth, 600),
       }
     },
+
     created:function(){
       polls.doc(this.$route.params.pollid).get().then(snapshot=>{
         this.candidates = snapshot.data().candidates
