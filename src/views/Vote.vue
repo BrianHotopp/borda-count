@@ -5,6 +5,7 @@
       <b-row>
         <h1>Vote</h1>
       </b-row>
+      <hr>
       <b-row>
         <p>
           Poll Share Link (Click to copy):
@@ -12,6 +13,12 @@
       </b-row>
       <b-row>
         <b-button v-on:click="copyPollLink()" class="btn btn-outline-light">{{theroute}}</b-button>
+        
+      </b-row>
+      <b-row>
+        <div class="alert alert-success mt-1" role="alert" v-if="copied">
+          Link Copied!
+        </div>
       </b-row>
       <hr>
       <b-row>
@@ -24,7 +31,7 @@
       <b-row>
       <draggable class="list-group mb-3" :list="candidates" group="people">
         <div class="list-group-item" v-for="(element, index) in candidates" v-bind:key="index">
-          {{ index + 1 }} {{ element.name }} 
+        {{ element.name }} 
         </div>
       </draggable>
       </b-row>
@@ -60,6 +67,7 @@ export default {
   },
   data() {
     return {
+      copied: 0,
       theroute:"",
       title: "",
       candidates: [],
@@ -89,7 +97,10 @@ export default {
     },
   },
   methods:{
-
+    copyPollLink(){
+      this.$copyText(window.location.origin + "/" + this.$router.resolve({name: 'vote', params: {id: 1}}).href)
+      this.copied = 1
+    },
     submitBallot(){
       polls.doc(this.$route.params.pollid).get().then(snapshot=>{
         this.saved_candidates = snapshot.data().candidates, this.gofast()

@@ -1,5 +1,5 @@
 {
-  "name": "irsp",
+  "name": "borda-count-strawpoll",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "pure-vue-chart": "^0.3.4",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
+    "vue-clipboard2": "^0.3.1",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.5",
     "vue-template-compiler": "^2.6.11",

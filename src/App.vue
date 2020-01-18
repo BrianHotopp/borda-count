@@ -6,6 +6,9 @@
 </template>
 
 <script lang="ts">
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
 import { firestorePlugin } from 'vuefire'
 
 Vue.use(firestorePlugin)

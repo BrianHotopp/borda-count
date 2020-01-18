@@ -64,8 +64,8 @@ body, html {
   width: 100%;
 }
 body {
-  background-color:#55828b;
-  color:#c9e4ca;
+  background-color:#ded568;
+  color:#A82711;
 }
   
   .inputsize{
@@ -104,7 +104,7 @@ export default {
           
           this.newpollID = result.id
           const temp = '/vote/' + result.id
-          console.log(result.id)
+          
           
           this.$router.push({ path: temp })
         }

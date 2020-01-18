@@ -1,10 +1,13 @@
 <template>
   <div class="results">
     <b-container>
-      <b-row class="mt-5">
+      <b-row class="mt-5 p-3">
         <h1>Results</h1>
       </b-row>
       <hr>
+      <b-row>
+        {{question}}
+      </b-row>
       <b-row v-for="(candidate, index) in candidates" v-bind:key="index">
         {{index + 1}}. {{candidate.name}}
       </b-row>
@@ -49,7 +52,7 @@
       });
       })// this gets the candidates list from the firebase db without doing any live binding
       
-      console.log(this.graphdata)
+      
    
 // this.$route.params.pollid
 
