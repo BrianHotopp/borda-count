@@ -1,12 +1,23 @@
 <template>
   <div class="results">
     <b-container>
-      <b-row>
+      <b-row class="mt-5">
         <h1>Results</h1>
       </b-row>
       <hr>
       <b-row v-for="(candidate, index) in candidates" v-bind:key="index">
-        {{candidate.name}}
+        {{index + 1}}. {{candidate.name}}
+      </b-row>
+      <b-row>
+        <pure-vue-chart v-if="graphdata.length" class="mt-4"
+          :points=graphdata
+          :show-y-axis="false"
+          :show-x-axis="true"
+          :width=600
+          :height=200
+          :show-values="true"
+          
+        />
       </b-row>
     </b-container>
   
@@ -14,13 +25,16 @@
 </template>
 <script>
   import { db } from '../db'
+  import PureVueChart from 'pure-vue-chart'
   const polls = db.collection('polls') // this is not a live binding
   export default {
     name: "results",
     data() {
       return {
         candidates: [],
-        question: ""
+        question: "",
+        graphdata: [],
+        
       }
     },
     created:function(){
@@ -28,11 +42,21 @@
         this.candidates = snapshot.data().candidates
         this.question = snapshot.data().question
         this.candidates.sort((a,b) => (a.votes < b.votes) ? 1 : ((b.votes < a.votes) ? -1 : 0));
-      })// this gets the candidates list from the firebase db without doing any live binding
+        this.candidates.forEach(element => {
 
+        this.graphdata.push({"label": element.name, "value": element.votes})
+
+      });
+      })// this gets the candidates list from the firebase db without doing any live binding
+      
+      console.log(this.graphdata)
+   
 // this.$route.params.pollid
 
 
+    },
+    components: {
+    PureVueChart,
     },
   };
 

@@ -1,8 +1,17 @@
 <template>
   <div class="vote">
     <b-container class="mt-5 p-3">
+      
       <b-row>
         <h1>Vote</h1>
+      </b-row>
+      <b-row>
+        <p>
+          Poll Share Link (Click to copy):
+        </p>
+      </b-row>
+      <b-row>
+        <b-button v-on:click="copyPollLink()" class="btn btn-outline-light">{{theroute}}</b-button>
       </b-row>
       <hr>
       <b-row>
@@ -10,7 +19,7 @@
       </b-row>
       <hr>
       <b-row>
-        <h3>{{question}}</h3>
+        <h3>{{title}}</h3>
       </b-row>
       <b-row>
       <draggable class="list-group mb-3" :list="candidates" group="people">
@@ -32,9 +41,7 @@
   
 </template>
 <style scoped>
-  .list-group-item{
-    color:
-  }
+  
 </style>
 <script>
 import { db } from '../db'
@@ -53,6 +60,7 @@ export default {
   },
   data() {
     return {
+      theroute:"",
       title: "",
       candidates: [],
       saved_candidates: [],
@@ -64,7 +72,9 @@ export default {
   
   created:function(){
     polls.doc(this.$route.params.pollid).get().then(snapshot=>{this.candidates = snapshot.data().candidates, this.title = snapshot.data().question})// this gets the candidates list from the firebase db without doing any live binding
-
+    var path = this.$router.resolve({name: 'vote', params: {id: 1}}).href
+    var fullUrl = window.location.origin + "/" + path
+    this.theroute = fullUrl
 // this.$route.params.pollid
 
 
@@ -91,7 +101,8 @@ export default {
         this.saved_candidates[this.candidates[i].original_index].votes += this.candidates.length - i
       }
       polls.doc(this.$route.params.pollid).update({candidates: this.saved_candidates})
-  
+      const temp = '/results/' + this.$route.params.pollid
+      this.$router.push({ path: temp })
     },
     log(){
       
