@@ -6,13 +6,9 @@
         <h1>Vote</h1>
       </b-row>
       <hr>
+   
       <b-row>
-        <p>
-          Poll Share Link (Click to copy):
-        </p>
-      </b-row>
-      <b-row>
-        <b-button v-on:click="copyPollLink()" class="btn btn-outline-light">{{theroute}}</b-button>
+        <b-button v-on:click="copyPollLink()" class="btn btn-outline-light">Poll Share Link (Click to copy)</b-button>
         
       </b-row>
       <b-row>

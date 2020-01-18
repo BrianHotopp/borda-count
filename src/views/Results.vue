@@ -16,8 +16,8 @@
           :points=graphdata
           :show-y-axis="false"
           :show-x-axis="true"
-          :width=600
-          :height=200
+          :width=250
+          :height=90
           :show-values="true"
           
         />
@@ -26,6 +26,9 @@
   
   </div>
 </template>
+<style>
+  
+</style>
 <script>
   import { db } from '../db'
   import PureVueChart from 'pure-vue-chart'
