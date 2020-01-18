@@ -1,7 +1,7 @@
 <template>
   <div class="results">
-    <b-container>
-      <b-row class="mt-5 p-3">
+    <b-container class="mt-5 p-3">
+      <b-row>
         <h1>Results</h1>
       </b-row>
       <hr>

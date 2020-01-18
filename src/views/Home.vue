@@ -3,9 +3,9 @@
     <div id = "header">
   
 </div>
-    <b-container class="head">
+    <b-container class="head mt-5 p-3">
       <b-row>
-        <h1 class="float-left mt-5">
+        <h1>
           Borda count strawpoll
         </h1>
         
