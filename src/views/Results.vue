@@ -6,7 +6,7 @@
       </b-row>
       <hr>
       <b-row>
-        {{question}}
+        <h2>{{question}}</h2>
       </b-row>
       <b-row v-for="(candidate, index) in candidates" v-bind:key="index">
         {{index + 1}}. {{candidate.name}}

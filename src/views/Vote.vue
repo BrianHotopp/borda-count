@@ -94,7 +94,7 @@ export default {
   },
   methods:{
     copyPollLink(){
-      this.$copyText(window.location.origin + "/" + this.$router.resolve({name: 'vote', params: {id: 1}}).href)
+      this.$copyText(window.location.href)
       this.copied = 1
     },
     submitBallot(){
